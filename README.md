@@ -33,5 +33,10 @@ Uncaught ReferenceError: createFFmpegCore is not defined
 https://github.com/ffmpegwasm/ffmpeg.wasm/issues/262
 ```
 
+### 预览链接
+```
+https://mp4-to-gif-silk.vercel.app/index
+```
+
 
 
