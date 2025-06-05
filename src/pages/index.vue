@@ -157,8 +157,8 @@ const setEndTime = () => {
 
 const ffmpeg = createFFmpeg({
   log: true,
-  // corePath: '/ffmpeg/ffmpeg-core.js',
-  corePath: 'https://unpkg.com/@ffmpeg/core@0.10.0/dist/ffmpeg-core.js',
+  corePath: '/ffmpeg/ffmpeg-core.js',
+  // corePath: 'https://unpkg.com/@ffmpeg/core@0.10.0/dist/ffmpeg-core.js',
   progress: ({ratio}) => {
     // console.log(`完成率: ${(ratio * 100).toFixed(2)}%`)
     progressText.value = `完成率: ${(ratio * 100).toFixed(2)}%`
