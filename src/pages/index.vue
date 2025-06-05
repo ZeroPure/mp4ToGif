@@ -48,6 +48,7 @@
           <el-button @click="onConvertClick" type="success" size="large">Convert to Gif</el-button>
         </el-form-item>
       </el-form>
+      <text class="progress" style="margin-top: 10px; display: block; font-size: 14px; color: #666;">{{ progressText }}</text>
       <div v-if="gifInfo" style="width: 98%;margin-top: 20px;border: 1px solid #cccccc;padding: 15px;display: flex;justify-content: space-between;align-items: center">
         <div style="display: flex;align-items: center">
           <img src="@/assets/image.png" alt="png" style="width: 50px;height: 50px;">
@@ -63,6 +64,7 @@
 import {nextTick, reactive, ref} from 'vue'
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 import { ElMessage, ElMessageBox } from 'element-plus'
+const progressText =ref('')
 const videoURL = ref('')
 const uploadRef = ref(null)
 const videoRef = ref(null)
@@ -131,10 +133,11 @@ const handleChange = (file) => {
   gifInfo.value = null
   formData.startTime = null
   formData.endTime = null
+  progressText.value = ''
   nextTick(() => {
     videoURL.value = URL.createObjectURL(rawFile)
     videoFile.value = rawFile
-    console.log(videoURL.value)
+    // console.log(videoURL.value)
   })
   // 清除文件列表，从而可以再次上传
   uploadRef.value?.clearFiles()
@@ -154,9 +157,11 @@ const setEndTime = () => {
 
 const ffmpeg = createFFmpeg({
   log: true,
-  corePath: '/ffmpeg/ffmpeg-core.js',
+  // corePath: '/ffmpeg/ffmpeg-core.js',
+  corePath: 'https://unpkg.com/@ffmpeg/core@0.10.0/dist/ffmpeg-core.js',
   progress: ({ratio}) => {
-    console.log(`完成率: ${(ratio * 100).toFixed(2)}%`)
+    // console.log(`完成率: ${(ratio * 100).toFixed(2)}%`)
+    progressText.value = `完成率: ${(ratio * 100).toFixed(2)}%`
   }
 })
 const convertToGif = async() => {
