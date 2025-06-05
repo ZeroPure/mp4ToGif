@@ -165,6 +165,7 @@ const convertToGif = async() => {
 
   try{
     if(!ffmpeg.isLoaded()){
+      ElMessage.info('Loading ffmpeg-core.js, please wait a moment')
       await ffmpeg.load()
     }
     // 写入文件
